@@ -27,7 +27,7 @@ module "my_vpc" {
 module "openvpn" {
   source      = "./modules/openvpn"
   ami_id      = "ami-000ea6370ba7c6885"
-  key_name    = "woogie"
+  key_name    = "woogiekey"
   subnet_id   = module.my_vpc.public_subnet_ids[0]
   vpc_id      = module.my_vpc.vpc_id
 }

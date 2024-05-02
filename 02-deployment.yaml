@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kube-system
+  name: sports
+spec:
+  revisionHistoryLimit: 5
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 0%
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sports
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sports
+    spec:
+      containers:
+        - name: sports
+          image: "879266492457.dkr.ecr.ap-northeast-2.amazonaws.com/sports:3b21c"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
